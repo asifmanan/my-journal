@@ -1,4 +1,4 @@
-package io.myjournal.myjournal;
+package io.myjournal;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,4 +1,4 @@
-package io.myjournal.myjournal;
+package io.myjournal;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
