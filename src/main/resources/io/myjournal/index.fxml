@@ -9,6 +9,12 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="io.myjournal.controllers.IndexController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label fx:id="titleLabel"/>
+            prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color:white;">
+
+    <VBox>
+        <Button text="New Journal Entry"/>
+        <ListView fx:id="entriesListView"/>
+
+    </VBox>
 </AnchorPane>
