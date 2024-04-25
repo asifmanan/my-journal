@@ -1,6 +1,7 @@
 module io.myjournal {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens io.myjournal to javafx.fxml;
