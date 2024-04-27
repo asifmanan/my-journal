@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="io.myjournal.controllers.IndexController"
-            prefHeight="400.0" prefWidth="600.0"
-            style="-fx-background-color:white;">
-
-    <VBox>
-        <Button text="New Journal Entry"/>
-        <ListView fx:id="entriesListView"/>
-
-    </VBox>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.myjournal.controllers.IndexController">
+   <top>
+      <HBox prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <FlowPane hgap="5.0" prefHeight="61.0" prefWidth="620.0">
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+            <Button fx:id="btnNewJournalEntry" mnemonicParsing="false" onAction="#onBtnNewJournalEntryClick" text="New Journal Entry" />
+            <Button fx:id="btnDeleteJournalEntry" mnemonicParsing="false" onAction="#onBtnDeleteJournalEntryClick" text="Delete Journal Entry" />
+         </FlowPane>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="355.0" prefWidth="165.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="2.5" top="5.0" />
+         </padding>
+         <ListView fx:id="listViewJournalEntryCollection" prefHeight="359.0" prefWidth="157.0" />
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="5.0" left="2.5" right="5.0" top="5.0" />
+         </padding>
+         <TextField fx:id="titleTextDisplay" editable="false" />
+         <TextArea fx:id="contentTextDisplay" editable="false" prefHeight="327.0" prefWidth="468.0" />
+      </VBox>
+   </center>
+</BorderPane>

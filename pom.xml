@@ -68,10 +68,10 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.2.0</version>
 <!--                <configuration>-->
-<!--                    <mainClass>io.myjournal.HelloApplication</mainClass>-->
+<!--                    <mainClass>io.myjournal.Main</mainClass>-->
 <!--                </configuration>-->
                 <configuration>
-                    <mainClass>io.myjournal.HelloApplication</mainClass> <!-- Correctly specify your main class here -->
+                    <mainClass>io.myjournal.Main</mainClass> <!-- Correctly specify your main class here -->
                     <classpathScope>compile</classpathScope>
                     <arguments>
                         <argument>--module-path</argument>
@@ -79,7 +79,7 @@
                         <argument>--add-modules</argument>
                         <argument>javafx.controls,javafx.fxml,javafx.graphics,javafx.base</argument>
                         <argument>-m</argument>
-                        <argument>io.myjournal/io.myjournal.HelloApplication</argument>
+                        <argument>io.myjournal/io.myjournal.Main</argument>
                     </arguments>
                 </configuration>
             </plugin>
@@ -101,7 +101,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>io.myjournal/io.myjournal.HelloApplication</mainClass>
+                            <mainClass>io.myjournal/io.myjournal.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

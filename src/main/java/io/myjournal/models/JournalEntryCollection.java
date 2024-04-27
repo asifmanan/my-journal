@@ -32,4 +32,14 @@ public class JournalEntryCollection {
         JournalEntry journalEntry = new JournalEntry(title, bodyText);
         this.addEntry(journalEntry);
     }
+    public void deleteEntry(int index) {
+        JournalEntry oldValue = journalEntryList.remove(index);
+        pcs.firePropertyChange("entryDeleted",oldValue,null);
+    }
+    public List<JournalEntry> getAllJournalEntries(){
+        return this.journalEntryList;
+    }
+    public int getIndex(JournalEntry journalEntry){
+        return journalEntryList.indexOf(journalEntry);
+    }
 }

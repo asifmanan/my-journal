@@ -1,0 +1,14 @@
+Problem:
+This is a simple application so I wanted to manage all the journal entries in the array inside the JournalEntryCollectoin class.
+So the problem is that how do I ensure there is only one instance of JournalEntryCollection throughout the application space.
+One approach to deal with this is to make use of singleton patterns, which uses a static method and allows only one instance of an object to exist in the application space.
+
+Another approach is to make use of factory pattern which I believe is more robust and scalable, It can allow more flexibility when dealing with such kind of situations in other areas of application.
+So, for this application. I will first use a factory pattern to create our controllers.
+Although constructor injection is a standard and accepted method in Java but as per my research on javafx, the constructor injection approach does not work when working with java fx applications. Because of the way the FXMLLoader instantiate constructor class
+(by making use of no argument constructor, as it rely on java reflection to instantiate controllers). So a better approach in this scenario would be to make use of factory patterns.
+this approach is more inline with how the JavaFx architecture is setup and works.
+
+Learnings: -
+FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/myjournal/newJournalEntry.fxml"));
+this

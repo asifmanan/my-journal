@@ -2,32 +2,90 @@ package io.myjournal.controllers;
 
 import io.myjournal.models.JournalEntry;
 import io.myjournal.models.JournalEntryCollection;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class IndexController {
-    @FXML private ListView<String> entriesListView;
-    private JournalEntryCollection journalEntryCollection = new JournalEntryCollection();
-    private ObservableList<String> entryTitles = FXCollections.observableArrayList();
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-//    @FXML private Label titleLabel;
-//    @FXML private Label timeLabel;
+public class IndexController implements PropertyChangeListener {
+    @FXML public Button btnNewJournalEntry;
+    @FXML protected Button btnDeleteJournalEntry;
+    @FXML private ListView<JournalEntry> listViewJournalEntryCollection;
+    private final JournalEntryCollection journalEntryCollection = new JournalEntryCollection();
+
+//    private ObservableList<String> entryTitles = FXCollections.observableArrayList();
+    @FXML private TextField titleTextDisplay;
+    @FXML private TextArea contentTextDisplay;
 //    @FXML Label datelabel;
     public IndexController(){
-        journalEntryCollection.addPropertyChangeListener(evt -> {
-            if("addEntry".equals(evt.getPropertyName())) {
-                JournalEntry journalEntry = (JournalEntry) evt.getNewValue();
-                entryTitles.add(journalEntry.getTitle());
-            }
-        });
-        journalEntryCollection.getJournalEntryList().forEach(entry -> entryTitles.add(entry.getTitle()));
+
     }
     @FXML
     public void initialize(){
-        entriesListView.setItems(entryTitles);
+        journalEntryCollection.addPropertyChangeListener(this);
+        populateListView();
+        listViewJournalEntryCollection.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> updateSelection(newValue));
+    }
+    private void updateSelection(JournalEntry selectedJournalEntry){
+        if (selectedJournalEntry!=null) {
+            titleTextDisplay.setText(selectedJournalEntry.getTitle());
+            contentTextDisplay.setText(selectedJournalEntry.getBodyText());
+        } else {
+            titleTextDisplay.setText("");
+            contentTextDisplay.setText("");
+        }
+    }
+    @FXML protected void onBtnNewJournalEntryClick() {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/myjournal/newJournalEntry.fxml"));
+            ControllerFactory controllerFactory = new ControllerFactory();
+            fxmlLoader.setControllerFactory(new ControllerFactory(journalEntryCollection));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage journalEntryWindow = new Stage();
+            journalEntryWindow.setTitle("New Journal Entry");
+            journalEntryWindow.setScene(scene);
+            journalEntryWindow.show();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    @FXML protected void onBtnDeleteJournalEntryClick() {
+        JournalEntry listViewSelectedEntry = listViewJournalEntryCollection.getSelectionModel().getSelectedItem();
+        if(listViewSelectedEntry!=null){
+            int index = journalEntryCollection.getIndex(listViewSelectedEntry);
+            journalEntryCollection.deleteEntry(index);
+        }
+
     }
 
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals("addEntry")){
+            JournalEntry journalEntry = (JournalEntry) evt.getNewValue();
+            addToListView(journalEntry);
+        }
+        if(evt.getPropertyName().equals("entryDeleted")){
+            int selectedIndex = listViewJournalEntryCollection.getSelectionModel().getSelectedIndex();
+            listViewJournalEntryCollection.getItems().remove(selectedIndex);
+        }
+    }
+    private void populateListView() {
+        listViewJournalEntryCollection.getItems().addAll(journalEntryCollection.getAllJournalEntries());
+    }
+    public void addToListView(JournalEntry journalEntry) {
+        listViewJournalEntryCollection.getItems().add(journalEntry);
+    }
 }

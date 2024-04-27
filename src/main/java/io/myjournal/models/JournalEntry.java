@@ -36,4 +36,8 @@ public class JournalEntry {
     public boolean getState(){
         return this.state;
     }
+    @Override
+    public String toString() {
+        return this.getTitle();
+    }
 }
