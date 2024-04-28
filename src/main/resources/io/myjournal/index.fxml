@@ -3,14 +3,12 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.myjournal.controllers.IndexController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.myjournal.controllers.IndexController">
    <top>
       <HBox prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <FlowPane hgap="5.0" prefHeight="61.0" prefWidth="620.0">
-            <opaqueInsets>
-               <Insets />
-            </opaqueInsets>
+         <FlowPane alignment="CENTER_LEFT" hgap="5.0">
             <padding>
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
@@ -20,20 +18,43 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="355.0" prefWidth="165.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="2.5" top="5.0" />
+            <Insets left="5.0" right="2.5" top="5.0" />
          </padding>
-         <ListView fx:id="listViewJournalEntryCollection" prefHeight="359.0" prefWidth="157.0" />
+         <ListView fx:id="listViewJournalEntryCollection" prefWidth="185.0" />
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0" BorderPane.alignment="CENTER">
+      <VBox spacing="6.0" BorderPane.alignment="CENTER">
          <padding>
-            <Insets bottom="5.0" left="2.5" right="5.0" top="5.0" />
+            <Insets left="2.5" right="5.0" top="5.0" />
          </padding>
          <TextField fx:id="titleTextDisplay" editable="false" />
-         <TextArea fx:id="contentTextDisplay" editable="false" prefHeight="327.0" prefWidth="468.0" />
+         <TextArea fx:id="contentTextDisplay" editable="false" />
       </VBox>
    </center>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <FlowPane>
+            <Label fx:id="lblStatus">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+         </FlowPane>
+         <FlowPane alignment="CENTER_RIGHT" columnHalignment="RIGHT" hgap="20.0">
+            <Label fx:id="lblCreatedOn">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lblUpdatedOn">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+         </FlowPane>
+      </HBox>
+   </bottom>
 </BorderPane>
