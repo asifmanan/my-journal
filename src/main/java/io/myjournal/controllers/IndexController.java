@@ -16,12 +16,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class IndexController implements PropertyChangeListener {
+    private final JournalEntryCollection journalEntryCollection = new JournalEntryCollection();
     @FXML public Button btnNewJournalEntry;
     @FXML protected Button btnDeleteJournalEntry;
     @FXML private ListView<JournalEntry> listViewJournalEntryCollection;
-    private final JournalEntryCollection journalEntryCollection = new JournalEntryCollection();
-
-//    private ObservableList<String> entryTitles = FXCollections.observableArrayList();
     @FXML private TextField titleTextDisplay;
     @FXML private TextArea contentTextDisplay;
 //    @FXML Label datelabel;
@@ -47,7 +45,6 @@ public class IndexController implements PropertyChangeListener {
     @FXML protected void onBtnNewJournalEntryClick() {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/myjournal/newJournalEntry.fxml"));
-            ControllerFactory controllerFactory = new ControllerFactory();
             fxmlLoader.setControllerFactory(new ControllerFactory(journalEntryCollection));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -73,7 +70,7 @@ public class IndexController implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals("addEntry")){
+        if(evt.getPropertyName().equals("entryAdded")){
             JournalEntry journalEntry = (JournalEntry) evt.getNewValue();
             addToListView(journalEntry);
         }
@@ -83,7 +80,7 @@ public class IndexController implements PropertyChangeListener {
         }
     }
     private void populateListView() {
-        listViewJournalEntryCollection.getItems().addAll(journalEntryCollection.getAllJournalEntries());
+        listViewJournalEntryCollection.getItems().addAll(journalEntryCollection.getJournalEntryList());
     }
     public void addToListView(JournalEntry journalEntry) {
         listViewJournalEntryCollection.getItems().add(journalEntry);

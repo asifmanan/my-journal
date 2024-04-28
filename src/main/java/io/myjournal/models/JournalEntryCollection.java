@@ -25,7 +25,7 @@ public class JournalEntryCollection {
         if (journalEntry.getState()) {
             journalEntryList.add(journalEntry);
             int index = getSize() - 1;
-            pcs.firePropertyChange("addEntry",null,journalEntry);
+            pcs.firePropertyChange("entryAdded",null,journalEntry);
         }
     }
     public void addEntry(String title, String bodyText){
@@ -35,9 +35,6 @@ public class JournalEntryCollection {
     public void deleteEntry(int index) {
         JournalEntry oldValue = journalEntryList.remove(index);
         pcs.firePropertyChange("entryDeleted",oldValue,null);
-    }
-    public List<JournalEntry> getAllJournalEntries(){
-        return this.journalEntryList;
     }
     public int getIndex(JournalEntry journalEntry){
         return journalEntryList.indexOf(journalEntry);
